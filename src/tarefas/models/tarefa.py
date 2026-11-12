@@ -51,3 +51,5 @@ class Tarefa:
 # Área 51 (testes)
 # tarefa = Tarefa('Terceira tarefa do Galbiati via Python')
 # tarefa.salvarTarefa()
+# tarefa = Tarefa('Terceira tarefa do Galbiati via Python')
+# tarefa.salvarTarefa()
