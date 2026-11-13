@@ -21,7 +21,7 @@ class Tarefa:
         sql = '''INSERT INTO tarefas (titulo_tarefa, data_conclusao) 
         VALUES (%s, %s);'''
         params = (self.titulo, self.data_conclusao) 
-        # O uso de binding params protege contra SQL Injection
+        # O uso de `binding params` protege contra SQL Injection
 
         # Gerenciador de contexto (with)
         # Acessa os métodos __enter__ e __exit__ da classe
@@ -49,7 +49,5 @@ class Tarefa:
 
 
 # Área 51 (testes)
-# tarefa = Tarefa('Terceira tarefa do Galbiati via Python')
-# tarefa.salvarTarefa()
 # tarefa = Tarefa('Terceira tarefa do Galbiati via Python')
 # tarefa.salvarTarefa()

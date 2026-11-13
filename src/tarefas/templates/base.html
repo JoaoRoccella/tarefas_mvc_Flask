@@ -20,11 +20,13 @@
         {% for tarefa in tarefas_da_pagina %}
             <li>
                 {{ tarefa.titulo_tarefa }} - {{ tarefa.data_conclusao }}
-                <a href="#">Apagar</a> <!-- Link para a rota de apagar este ID -->
+                <a href="#">Apagar</a> 
+                <!-- Crie um link para a rota de apagar este ID -->
             </li>
         {% endfor %}
     </ul>
 
+    <!-- TODO: remover o JS -->
     <!-- <script>
         // Aplicação MVC (Modelagem-Visualização-Controle)
 

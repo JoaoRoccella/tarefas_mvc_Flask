@@ -39,7 +39,32 @@ def home():
         tarefas_da_pagina=tarefas
     )
 
-# Crie uma nova funcionalidade para apagar cada uma das tarefas cadastradas
+""" 
+TAREFA - DELETE: Crie uma nova funcionalidade para apagar cada uma das 
+tarefas cadastradas, individualmente. Tenha em mente que você precisará 
+criar:
+
+- Um método no modelo (Tarefa) para executar a ação no banco de dados
+- Um link no View/Template (base.html) para chamar a rota do Controller
+- Uma rota no Controller (app.py) para intermediar a operação
+"""
+
+"""
+TAREFA - UPDATE: Crie uma nova funcionalidade para editar/atualizar cada
+uma das tarefas, individualmente. A tarefa deverá ser editada/alterada no
+próprio formulário da página `base.html`. Note que você deverá criar:
+
+- Um método no modelo (Tarefa) para carregar uma tarefa salva no banco
+na memória (heap) do computador, instanciando um novo objeto;
+- Um método no modelo (Tarefa) para alterar a tarefa com os novos valores;
+- Um link no View/Template (base.html) para chamar a rota do Controller
+- O botão `Adicionar` deve se tornar um botão `Atualizar`
+- Uma rota no Controller (app.py) para intermediar a operação que aceite
+os métodos GET (carregar a tarefa no formulário) e POST (enviar os dados
+alterados de volta para o Controller)
+- Não use JavaScript
+"""
+
 @app.route('/delete/<int:id>')
 def apagar_id_especificado(id):
     # Código aqui
