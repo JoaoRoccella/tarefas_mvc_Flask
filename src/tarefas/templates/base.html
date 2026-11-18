@@ -10,95 +10,33 @@
     <h1>Digite a tarefa e a data de conclusão:</h1>
 
     <form method="POST">  <!-- seleciona o método HTTP -->
-        <input type="text" id="tituloTarefa" name="tituloTarefa">
-        <input type="date" id="dataConclusao" name="dataConclusao">
-        <button type="submit">Adicionar</button>
+        
+        <input type="text" id="tituloTarefa" name="tituloTarefa" 
+            value="{{ tarefa_edicao.titulo if tarefa_edicao }}">
+        
+        <input type="date" id="dataConclusao" name="dataConclusao"
+            value="{{ tarefa_edicao.data_conclusao if tarefa_edicao }}">
+        
+        <button type="submit">
+            {{ 'Adicionar' if not tarefa_edicao else 'Atualizar'}}
+        </button>
+        
     </form>
-    <!-- <output id="listaTarefas">Nenhuma tarefa cadastrada</output> -->
 
     <ul id="listaTarefas">
         {% for tarefa in tarefas_da_pagina %}
             <li>
                 {{ tarefa.titulo_tarefa }} - {{ tarefa.data_conclusao }}
-                <a href="#">Apagar</a> 
-                <!-- Crie um link para a rota de apagar este ID -->
+                
+                <a href="{{ url_for('editar_id_especificado', 
+                    id_url=tarefa.id_tarefa) }}">Editar</a>
+                
+                <a href="{{ url_for('apagar_id_especificado', 
+                    id_url=tarefa.id_tarefa) }}">Apagar</a>
+
             </li>
         {% endfor %}
     </ul>
 
-    <!-- TODO: remover o JS -->
-    <!-- <script>
-        // Aplicação MVC (Modelagem-Visualização-Controle)
-
-        // Seção de Modelagem
-        let tarefas;
-        const tarefasSalvas = JSON.parse(localStorage.getItem('tarefas'));
-
-        if (Array.isArray(tarefasSalvas)) {
-            tarefas = tarefasSalvas;
-        } else {
-            tarefas = [];
-        }
-
-        function salvarTarefas() {
-            localStorage.setItem('tarefas', JSON.stringify(tarefas));
-        }
-
-        // Seção de Visualização
-        function renderizarTarefas() {
-            const listaTarefas = document.getElementById('listaTarefas');
-            listaTarefas.innerHTML = "";
-
-            tarefas.forEach(function (tarefa) {
-                const divTarefa = document.createElement('div');
-                divTarefa.innerHTML = tarefa.tituloTarefa + ' - ' + tarefa.dataConclusao;
-
-                const botaoApagar = document.createElement('button');
-                botaoApagar.innerHTML = "Apagar 🗑️";
-                botaoApagar.onclick = apagarTarefa;
-                botaoApagar.id = tarefa.idTarefa;
-
-                divTarefa.appendChild(botaoApagar);
-                listaTarefas.appendChild(divTarefa);
-            });
-        }
-
-        // Seção de Controle
-        function adicionarTarefa() {
-            const tituloTarefa = document.getElementById('tituloTarefa').value;
-            const dataConclusao = document.getElementById('dataConclusao').value;
-
-            tarefas.push(
-                {
-                    tituloTarefa: tituloTarefa,
-                    dataConclusao: dataConclusao,
-                    idTarefa: Date.now()
-                }
-            );
-
-            salvarTarefas();
-            renderizarTarefas();
-        }
-
-        function apagarTarefa(evento) {
-            const botaoClicado = evento.target;
-            const idTarefa = botaoClicado.id;
-            
-            tarefas = tarefas.filter(function (tarefa) {
-                if (tarefa.idTarefa == idTarefa) {
-                    return false;
-                } else {
-                    return true;
-                }
-            });
-
-            salvarTarefas();
-            renderizarTarefas();
-
-        }
-
-        renderizarTarefas();
-
-    </script> -->
 </body>
 </html>

@@ -31,7 +31,7 @@ def home():
 
         return redirect(url_for('home'))
 
-    tarefas = Tarefa.listarTarefas()
+    tarefas = Tarefa.listar_tarefas()
     
     return render_template(
         'base.html', 
@@ -44,9 +44,9 @@ TAREFA - DELETE: Crie uma nova funcionalidade para apagar cada uma das
 tarefas cadastradas, individualmente. Tenha em mente que você precisará 
 criar:
 
-- Um método no modelo (Tarefa) para executar a ação no banco de dados
-- Um link no View/Template (base.html) para chamar a rota do Controller
-- Uma rota no Controller (app.py) para intermediar a operação
+- Um método no modelo (Tarefa) para executar a ação no banco de dados ✅
+- Um link no View/Template (base.html) para chamar a rota do Controller ✅
+- Uma rota no Controller (app.py) para intermediar a operação ✅
 """
 
 """
@@ -65,10 +65,33 @@ alterados de volta para o Controller)
 - Não use JavaScript
 """
 
-@app.route('/delete/<int:id>')
-def apagar_id_especificado(id):
-    # Código aqui
-    pass
+@app.route('/delete/<int:id_url>')
+def apagar_id_especificado(id_url):
+    Tarefa.apagar_tarefa(id_url)
+    return redirect(url_for('home'))
+
+@app.route('/edit/<int:id_url>', methods=['GET', 'POST'])
+def editar_id_especificado(id_url):
+
+    if request.method == 'POST':
+        tarefa_edicao = Tarefa(
+            id=id_url,
+            titulo=request.form['tituloTarefa'],
+            data_conclusao=request.form['dataConclusao']
+        )
+
+        tarefa_edicao.atualizar_tarefa()
+        return redirect(url_for('home'))
+
+    tarefas = Tarefa.listar_tarefas()
+    tarefa_selecionada = Tarefa.carregar_tarefa(id_url)
+
+    return render_template(
+        'base.html',
+        tarefa_edicao=tarefa_selecionada,
+        tarefas_da_pagina = tarefas,
+        titulo_da_pagina = 'Editando tarefa...'
+    )
 
 if __name__ == '__main__':
     app.run()
