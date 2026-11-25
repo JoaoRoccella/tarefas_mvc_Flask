@@ -79,6 +79,7 @@ class Tarefa:
         return None
 
     def atualizar_tarefa(self):
+        """Atualiza a tarefa no banco de dados."""
 
         self.data_conclusao = self.data_conclusao or None
 
@@ -88,10 +89,3 @@ class Tarefa:
 
         with Database() as db:
             db.executar(sql, params)
-        
-
-
-
-# Área 51 (testes)
-# tarefa = Tarefa('Terceira tarefa do Galbiati via Python')
-# tarefa.salvarTarefa()
